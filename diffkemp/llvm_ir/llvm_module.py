@@ -224,12 +224,14 @@ class LlvmModule:
             # Extract paths: 1st path is source file name,
             # 2nd is project directory
             string = line[1:-1]
+            if source_file and (string.endswith(".h") or string.endswith(".c")
+                                ) and not string.startswith("/"):
+                string = string if not string.startswith("./") else string[2:]
+                result.add(os.path.join(root_dir, string))
             if not source_file:
                 source_file = string
             elif not root_dir:
                 root_dir = string
-            if string.endswith(".h") and not string.startswith("/"):
-                result.add(os.path.join(root_dir, string))
         # Add source file when project directory is known
         result.add(os.path.join(root_dir, source_file))
         return result
