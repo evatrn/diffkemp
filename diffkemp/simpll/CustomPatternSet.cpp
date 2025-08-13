@@ -78,7 +78,7 @@ CustomPatternSet::CustomPatternSet(std::string ConfigPath) {
     }
 
     // If a pattern is used as a configuration file, only load the pattern.
-    if (extension(ConfigPath) == ".ll") {
+    if (extension(ConfigPath) == ".bc") {
         addPatternFromFile(ConfigPath);
     } else {
         addPatternsFromConfig(ConfigPath);
